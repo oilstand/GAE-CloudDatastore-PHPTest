@@ -1,0 +1,26 @@
+runtime: php55
+api_version: 1
+
+threadsafe: true
+
+#instance_class: F2
+service: 'datastore-test'
+
+automatic_scaling:
+  min_idle_instances: 0           # idle状態にあるインスタンスの最小値
+  max_idle_instances: 1           # idle状態にあるインスタンスの最大値
+  min_pending_latency: 50ms      # リクエストを処理するまでに許される待ち時間の最小
+  max_pending_latency: 150ms      #automatic
+
+handlers:
+
+- url: /.*
+  script: index.php
+#  script: auto
+  secure: always                  # https 
+
+
+env_variables:
+# stage
+  DEV_MODE: 0
+  PROJECT_ID: '-your project id-'
